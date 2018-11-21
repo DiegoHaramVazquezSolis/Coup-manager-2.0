@@ -17,7 +17,7 @@ const RegistroView = ({step, changeStep})  => {
                 <GridItem xs={12} sm={12} md={4}>
                     <RegistroCapitanController changeStep={changeStep} />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4} style={{/*display: step === 0 ? 'none' : ''*/}}>
+                <GridItem xs={12} sm={12} md={4} style={{display: step === 0 ? 'none' : ''}}>
                     <RegistroTeamController changeStep={changeStep} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4} style={{display: step === 2 ? '' : 'none'}}>

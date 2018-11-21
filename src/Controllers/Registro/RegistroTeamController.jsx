@@ -26,6 +26,7 @@ class RegistroTeamController extends Component {
     createTeam = (e) => {
         e.preventDefault();
         this.props.createTeam(this.state.name, this.state.fileImage, () => {}, () => {}, this.props.captain);
+        this.props.changeStep();
     }
 
     render() {
