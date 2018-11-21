@@ -5,7 +5,6 @@ import CardAvatar from '../../Components/Card/CardAvatar';
 import {ReactComponent as Check} from './../../assets/checked.svg';
 
 const CompleteView = ({message}) => {
-    console.log(Check);
     return (
         <Card profile={true}>
             <CardAvatar profile>
