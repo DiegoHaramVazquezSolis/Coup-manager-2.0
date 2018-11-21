@@ -5,16 +5,11 @@ import { createUserWithEmail } from '../../redux/actions/userActions';
 
 class RegistroController extends Component {
     state = {
-        email: '',
-        password: '',
-        confirmPassword: '',
-        name: '',
-        phone: '',
-        teamName: ''
+        step: 0
     };
 
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+    changeStep = () => {
+        this.setState({ step: this.state.step + 1 });
     }
 
     signUpWithEmail = () => {
@@ -24,9 +19,8 @@ class RegistroController extends Component {
     render() {
         return (
             <RegistroView
-            onChange={this.onChange}
-            signUpWithEmail={this.signUpWithEmail}
-            {...this.state} />
+            changeStep={this.changeStep}
+            step={this.state.step} />
         );
     }
 }
