@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import LoginController from './Controllers/LoginController';
-import RegistroController from './Controllers/RegistroController';
+import RegistroController from './Controllers/Registro/RegistroController';
 
 const Routes = () => {
     return (

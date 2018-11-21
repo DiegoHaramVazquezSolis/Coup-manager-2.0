@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import RegistroView from '../Views/RegistroView';
-import { createUserWithEmail } from '../redux/actions/userActions';
+import RegistroView from '../../Views/Registro/RegistroView';
+import { createUserWithEmail } from '../../redux/actions/userActions';
 
 class RegistroController extends Component {
     state = {
