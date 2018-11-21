@@ -32,7 +32,6 @@ function userSignOutSuccess() {
 export const signInWithEmail = (email, password) => (dispatch) => {
     signInWithEmailAndPassword(email, password)
     .then((user) => {
-        getUserData(user.user, dispatch);
         return Promise.resolve(user);
     })
     .catch((error) => {
@@ -41,16 +40,31 @@ export const signInWithEmail = (email, password) => (dispatch) => {
     });
 }
 
-export const createUserWithEmail = (email, password) => (dispatch) => {
-    createUserWithEmailAndPassword(email, password)
+/**
+ * Use to create an account
+ * @param {String} email email of the new user
+ * @param {String} password Password of the new user
+ */
+export const createUserWithEmail = (email, password, name, phone) => (dispatch) => {
+    return createUserWithEmailAndPassword(email, password)
     .then((user) => {
-        getUserData(user.user, dispatch);
+        createUserData(user.user.uid, email, name, phone);
         return Promise.resolve(user);
     })
     .catch((error) => {
         console.log(error);
-        return Promise.reject(error.message);
+        return Promise.reject(error);
     });
+}
+
+/**
+ * Use when create account
+ * @param {String} uid Uid of the new user
+ * @param {String} name Name of the user
+ * @param {Phone} phone Phone number of the user
+ */
+function createUserData(uid, email, name, phone) {
+    usersRef.child(uid).set({uid, email, name, phone});
 }
 
 /**
@@ -61,18 +75,10 @@ export const createUserWithEmail = (email, password) => (dispatch) => {
 function getUserData(user, dispatch) {
     const userRef = usersRef.child(user.uid);
     userRef.on('value', (firebaseUser) => {
-        if (!firebaseUser.exists()) {
-            const data = {
-                displayName: user.displayName,
-                photoURL: user.photoURL,
-                email: user.email,
-                uid: user.uid
-            };
-            userRef.set(data);
-        } else {
+        if (firebaseUser.exists()) {
             return dispatch(userSignInSuccess(firebaseUser.val()));
         }
-    })
+    });
 }
 
 /**
