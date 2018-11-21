@@ -25,8 +25,7 @@ class RegistroTeamController extends Component {
 
     createTeam = (e) => {
         e.preventDefault();
-        this.props.createTeam(this.state.name, this.state.fileImage, () => {}, () => {}, this.props.captain);
-        this.props.changeStep();
+        this.props.createTeam(this.state.name, this.state.fileImage, () => {}, () => {}, () => {this.props.changeStep()}, this.props.captain);
     }
 
     render() {
@@ -42,7 +41,7 @@ class RegistroTeamController extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        createTeam: (teamName, imageFile, onBegin, setProgress, CaptainData) => createTeam(teamName, imageFile, onBegin, setProgress, CaptainData)(dispatch)
+        createTeam: (teamName, imageFile, onBegin, setProgress, afterUpload, CaptainData) => createTeam(teamName, imageFile, onBegin, setProgress, afterUpload, CaptainData)(dispatch)
     }
 }
 

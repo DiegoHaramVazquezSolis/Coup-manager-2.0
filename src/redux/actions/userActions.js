@@ -5,6 +5,7 @@ import {
 } from './../../services/Auth';
 import { usersRef } from '../../services/Database';
 import { auth } from '../../firebase';
+import { getTeam } from './teamActions';
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
@@ -76,6 +77,7 @@ function getUserData(user, dispatch) {
     const userRef = usersRef.child(user.uid);
     userRef.on('value', (firebaseUser) => {
         if (firebaseUser.exists()) {
+            dispatch(getTeam(firebaseUser.val().team || ''));
             return dispatch(userSignInSuccess(firebaseUser.val()));
         }
     });

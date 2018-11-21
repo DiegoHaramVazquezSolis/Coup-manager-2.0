@@ -4,6 +4,7 @@ import GridItem from '../../Components/Grid/GridItem';
 import RegistroCapitanController from '../../Controllers/Registro/RegistroCapitanController';
 import RegistroTeamController from '../../Controllers/Registro/RegistroTeamController';
 import CompleteView from './CompleteView';
+import ShareRegistro from './ShareRegistro';
 
 const RegistroView = ({step, changeStep})  => {
     return (
@@ -15,13 +16,23 @@ const RegistroView = ({step, changeStep})  => {
                         </GridItem>
                     }
                 <GridItem xs={12} sm={12} md={4}>
-                    <RegistroCapitanController changeStep={changeStep} />
+                    {step === 0 ?
+                        <RegistroCapitanController changeStep={changeStep} />
+                    :
+                        <CompleteView message="Paso 1 terminado correctamente" />
+                    }
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4} style={{display: step === 0 ? 'none' : ''}}>
-                    <RegistroTeamController changeStep={changeStep} />
+                    {step === 1 && step > 0 ?
+                        <RegistroTeamController changeStep={changeStep} />
+                    :
+                        <CompleteView message="Paso 2 terminado correctamente" />
+                    }
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4} style={{display: step === 2 ? '' : 'none'}}>
-                    <CompleteView message="Paso 3 terminado correctamente" />
+                    {step === 2 &&
+                        <ShareRegistro />
+                    }
                 </GridItem>
                 </GridContainer>
             </GridItem>
